@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "351303397771",
+    "firebase_url": "https://biogame-8e09c.firebaseio.com",
+    "project_id": "biogame-8e09c",
+    "storage_bucket": "biogame-8e09c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351303397771:android:8b500669c99d9f47",
+        "android_client_info": {
+          "package_name": "gr.biologymaniax.biogame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "351303397771-ib8oo0u1p1d95362sa7rfc2ppi7r673o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbzFHqRGtzm_FnHsMQlJPkid5mWpuhWXM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

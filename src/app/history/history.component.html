@@ -1,0 +1,58 @@
+<ActionBar class="action-bar">
+        <!-- 
+            Use the NavigationButton as a side-drawer button in Android
+            because ActionItems are shown on the right side of the ActionBar
+            -->
+        <NavigationButton ios:visibility="collapsed" class="action-nav-btn" icon="res://menu"
+            (tap)="onDrawerButtonTap()"></NavigationButton>
+        <!-- 
+            Use the ActionItem for IOS with position set to left. Using the
+            NavigationButton as a side-drawer button in iOS is not possible,
+            because its function is to always navigate back in the application.
+            -->
+        <ActionItem class="action-nav-btn" icon="res://navigation/menu"
+            android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Ιστορικό"></Label>
+    </ActionBar>
+    
+    <StackLayout orientation="vertical" class="m-t-30">
+        <ListView #listView [items]="items" separatorColor="transparent">
+            <ng-template let-item="item">
+                <GridLayout columns="100, *, 50" rows="auto, auto, auto" class="p-l-20"
+                    [nsRouterLink]="['/history/'+item.id]">
+                    
+                    <ng-container  *ngIf="item.score > 50; else red">
+                            <Label [text]="item.score + '%'" row="0" col="0" class="h1 score"></Label>
+                    </ng-container>
+                    <ng-template #red>
+                            <Label [text]="item.score + '%'" row="0" col="0" class="h1 score" color="red"></Label>
+                    </ng-template>
+                    <Label [text]="item.date" row="1" col="0" class="body date"></Label>    
+                    <ng-container *ngIf="item.chapter == 0;else withChapter">
+                        <Label [text]="'Όλα τα κεφάλαια'" row="0" col="1"
+                        class="info body h2 p-r-20"></Label>
+                    </ng-container>
+                    <ng-template #withChapter>
+                        <Label [text]="'Κεφάλαιο ' + item.chapter" row="0" col="1"
+                        class="info body h2 p-r-20"></Label>
+                    </ng-template>
+                    <ng-container *ngIf="item.difficulty == 0;else withDifficulty">
+                        <Label [text]="'Όλοι οι βαθμοί δυσκολίας'" row="1"
+                        col="1" class="info body p-r-20"></Label>
+                    </ng-container>
+                    <ng-template #withDifficulty>
+                        <Label [text]="'Βαθμός δυσκολίας: ' + item.difficulty" row="1"
+                        col="1" class="info body p-r-20"></Label>
+                    </ng-template>
+                    
+                    <Label text=">" row="0" col="2" class="h1 score" rowSpan="2"></Label>
+                    <StackLayout class="hr-light m-y-20" row="2" col="1" *ngIf="!item.last"></StackLayout>
+                    <StackLayout class="hr-light m-y-20" row="2" col="2" *ngIf="!item.last"></StackLayout>
+                    <StackLayout class="m-y-20" row="2" col="1" *ngIf="item.last"></StackLayout>
+                    <StackLayout class="m-y-20" row="2" col="2" *ngIf="item.last"></StackLayout>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </StackLayout>

@@ -1,0 +1,35 @@
+<FlexboxLayout class="page">
+	<StackLayout class="form">
+		<Image class="logo" src="res://logo"></Image>
+		<!--<Label class="header" text="APP NAME"></Label>-->
+
+		<GridLayout rows="auto, auto, auto">
+			<StackLayout row="0" class="input-field">
+				<TextField class="input" hint="Email" [isEnabled]="!processing" keyboardType="email" autocorrect="false" autocapitalizationType="none" [(ngModel)]="user.email" returnKeyType="next" (returnPress)="focusPassword()"></TextField>
+				<StackLayout class="hr-light"></StackLayout>
+			</StackLayout>
+
+			<StackLayout row="1" class="input-field">
+				<TextField #password class="input" [isEnabled]="!processing" hint="Κωδικός" secure="true" [(ngModel)]="user.password" [returnKeyType]="isLoggingIn ? 'done' : 'next'" (returnPress)="focusConfirmPassword()"></TextField>
+				<StackLayout class="hr-light"></StackLayout>
+			</StackLayout>
+
+			<StackLayout row="2" *ngIf="!isLoggingIn" class="input-field">
+				<TextField #confirmPassword class="input" [isEnabled]="!processing" hint="Επιβεβαίωση κωδικού" secure="true" [(ngModel)]="user.confirmPassword" returnKeyType="done"></TextField>
+				<StackLayout class="hr-light"></StackLayout>
+			</StackLayout>
+
+			<ActivityIndicator rowSpan="3" [busy]="processing"></ActivityIndicator>
+		</GridLayout>
+
+		<Button [text]="isLoggingIn ? 'Σύνδεση' : 'Εγγραφή'" [isEnabled]="!processing" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+		<Label *ngIf="isLoggingIn" text="Ξέχασες τον κωδικό σου;" class="login-label" (tap)="forgotPassword()"></Label>
+	</StackLayout>
+
+	<Label class="login-label sign-up-label" (tap)="toggleForm()">
+		<FormattedString>
+			<Span [text]="isLoggingIn ? 'Δεν έχεις λογαριασμό; ' : 'Σύνδεση'"></Span>
+			<Span [text]="isLoggingIn ? 'Εγγραφή' : ''" class="bold"></Span>
+		</FormattedString>
+	</Label>
+</FlexboxLayout>

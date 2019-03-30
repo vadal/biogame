@@ -1,0 +1,126 @@
+<!--<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Home"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content" tkMainContent>
+	<Label class="page-icon fa" text="&#xf015;"></Label>
+</GridLayout>
+-->
+
+<ActionBar class="action-bar" backgroundColor="#fff">
+    <NavigationButton visibility="collapsed"></NavigationButton>
+    <GridLayout columns="auto,*,auto" ios:padding="0 10" height="100%" width="100%">
+    </GridLayout>
+</ActionBar>
+
+<GridLayout>
+    <ScrollView>
+        <StackLayout height="100%">
+            <GridLayout #imageContainer backgroundColor="#fff" padding="80px 0 25px" class="header-background-view landmark-header" rows="*" columns="*">
+                <Image col="0" row="0" #image src="~/assets/images/logo.png" class="header-image"></Image>
+            </GridLayout>
+            <GridLayout backgroundColor="#ccc" columns="*, *" rows="*, *"
+                class="home-content">
+
+                <GridLayout class="home-box" row="0" col="0" columns="*" rows="auto, auto"
+                    [nsRouterLink]="['/new-game']">
+                    <FlexboxLayout height="100%" alignItems="center"
+                        justifyContent="center" alignContent="center"
+                        flexDirection="column">
+                        <GridLayout col="0" row="0" cols="*" rows="auto">
+                            <Label text="&#xf11b;" class="fa" col="0" row="0">
+                            </Label>
+                        </GridLayout>
+                        <GridLayout col="0" row="1" cols="*" rows="auto">
+                            <Label textWrap="true" text="Νέο παιχνίδι" col="0"
+                                row="0"></Label>
+                        </GridLayout>
+                    </FlexboxLayout>
+                </GridLayout>
+
+                <!--<GridLayout class="home-box" row="0" col="1" columns="*" rows="auto, auto"
+                    [nsRouterLink]="['/challenge-friend']">
+                    <FlexboxLayout height="100%" alignItems="center"
+                        justifyContent="center" alignContent="center"
+                        flexDirection="column">
+                        <GridLayout col="0" row="0" cols="*" rows="auto">
+                            <Label text="&#xf0c0;" class="fa" col="0" row="0">
+                            </Label>
+                        </GridLayout>
+                        <GridLayout col="0" row="1" cols="*" rows="auto">
+                            <Label textWrap="true" text="Παίξε με φίλο" col="0"
+                                row="0"></Label>
+                        </GridLayout>
+                    </FlexboxLayout>
+                </GridLayout>-->
+
+                <GridLayout class="home-box" row="0" col="1" columns="*" rows="auto, auto"
+                    (tap)="navigateToWrongs()">
+                    <FlexboxLayout height="100%" alignItems="center"
+                        justifyContent="center" alignContent="center"
+                        flexDirection="column">
+                        <GridLayout col="0" row="0" cols="*" rows="auto">
+                            <Label text="&#xf057;" class="fa" col="0" row="0">
+                            </Label>
+                        </GridLayout>
+                        <GridLayout col="0" row="1" cols="*" rows="auto">
+                            <Label textWrap="true" text="Παιχνίδι λαθών" col="0"
+                                row="0"></Label>
+                        </GridLayout>
+                    </FlexboxLayout>
+                </GridLayout>
+
+                <GridLayout class="home-box" row="1" col="0" columns="*" rows="auto, auto"
+                    [nsRouterLink]="['/history']">
+                    <FlexboxLayout height="100%" alignItems="center"
+                        justifyContent="center" alignContent="center"
+                        flexDirection="column">
+                        <GridLayout col="0" row="0" cols="*" rows="auto">
+                            <Label text="&#xf1da;" class="fa" col="0" row="0">
+                            </Label>
+                        </GridLayout>
+                        <GridLayout col="0" row="1" cols="*" rows="auto">
+                            <Label textWrap="true" text="Ιστορικό" col="0"
+                                row="0"></Label>
+                        </GridLayout>
+                    </FlexboxLayout>
+                </GridLayout>
+
+                <GridLayout class="home-box" row="1" col="1" columns="*" rows="auto, auto">
+                    <FlexboxLayout height="100%" alignItems="center"
+                        justifyContent="center" alignContent="center"
+                        flexDirection="column">
+                        <GridLayout col="0" row="0" cols="*" rows="auto">
+                            <Label text="&#xf128;" class="fa" col="0" row="0">
+                            </Label>
+                        </GridLayout>
+                        <GridLayout col="0" row="1" cols="*" rows="auto">
+                            <Label textWrap="true" text="Coming soon" col="0"
+                                row="0"></Label>
+                        </GridLayout>
+                    </FlexboxLayout>
+                </GridLayout>
+                <!--<GridLayout class="home-box" row="1" col="1" columns="*" rows="auto, auto"
+                    [nsRouterLink]="['/advanced-game']">
+                    <FlexboxLayout height="100%" alignItems="center"
+                        justifyContent="center" alignContent="center"
+                        flexDirection="column">
+                        <GridLayout col="0" row="0" cols="*" rows="auto">
+                            <Label text="&#xf19d;" class="fa" col="0" row="0">
+                            </Label>
+                        </GridLayout>
+                        <GridLayout col="0" row="1" cols="*" rows="auto">
+                            <Label textWrap="true" text="Παιχνίδι για προχωρημένους"
+                                col="0" row="0"></Label>
+                        </GridLayout>
+                    </FlexboxLayout>
+                </GridLayout>-->
+
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

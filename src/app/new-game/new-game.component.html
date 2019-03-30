@@ -1,0 +1,45 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" class="action-nav-btn" icon="res://menu"
+        (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem class="action-nav-btn" icon="res://navigation/menu"
+        android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Νέο παιχνίδι"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content" tkMainContent>
+    <ScrollView class="page" backgroundColor="#eeeeee">
+        <StackLayout class="home-panel">
+            <!--Add your page content here
+            <Label text="Είσαι έτοιμος να ξεκινήσεις;" class="game-heading"></Label>-->
+            <GridLayout class="bio-dropdown" backgroundColor="#fff">
+                <DropDown #dd hint="Επίλεξε βαθμό δυσκολίας"
+                    [items]="listPickerDifficulty" [(ngModel)]="selectedListPickerDifficultyIndex"
+                    (selectedIndexChanged)="selectedIndexChange($event, 'difficulty')"
+                    (opened)="onopen()" (closed)="onclose()" row="0" colSpan="2"
+                    class="default">
+                </DropDown>
+            </GridLayout>
+            <GridLayout class="bio-dropdown" backgroundColor="#fff">
+                <DropDown #dd hint="Επίλεξε κεφάλαιο" [items]="listPickerChapter"
+                    [(ngModel)]="selectedListPickerChapterIndex"
+                    (selectedIndexChanged)="selectedIndexChange($event, 'chapter')"
+                    (opened)="onopen()" (closed)="onclose()" row="0" colSpan="2"
+                    class="default"></DropDown>
+            </GridLayout>
+
+                <Button text="ΠΑΜΕ!" marginTop="20" padding="20" class="btn btn-primary" (tap)="onGoTap()"
+                    id="showbtn"></Button>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

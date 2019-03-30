@@ -1,0 +1,51 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" class="action-nav-btn" icon="res://menu"
+        (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem class="action-nav-btn" icon="res://navigation/menu"
+        android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Νέο παιχνίδι" *ngIf="!wrongs"></Label>
+    <Label class="action-bar-title" text="Παιχνίδι λαθών" *ngIf="wrongs"></Label>
+</ActionBar>
+
+<GridLayout rows="auto, auto, *, auto" columns="*, auto" backgroundColor="#eeeeee"
+    padding="15" *ngIf="questions && questions[currentQuestionIndex]">
+
+    <Label row="0" col="0" color="#000" fontSize="15" fontWeight="bold"
+        [text]="(currentQuestionIndex + 1) + ' από ' + questions.length"></Label>
+    <Label row="0" col="1" color="#000" fontSize="15" fontWeight="bold" text="Tέλος"
+        (tap)="end()"></Label>
+
+    <GridLayout row="1" col="0" colSpan="2" backgroundColor="#4A4A4A" height="2"
+        borderRadius="10" margin="10 0">
+        <StackLayout horizontalAlignment="left" backgroundColor="#4caf50"
+            height="2" borderRadius="10" [width]="(currentQuestionIndex * 100 / questions.length) + '%'"></StackLayout>
+    </GridLayout>
+
+    <GridLayout row="2" col="0" colSpan="2" margin="5" borderRadius="10">
+        <Label verticalAlignment="center" horizontalAlignment="center"
+            textAlignment="center" color="#000" fontSize="20" fontWeight="bold"
+            textWrap="true" [text]="questions[currentQuestionIndex].question"></Label>
+    </GridLayout>
+
+    <GridLayout *ngIf="questions" row="3" col="0" colSpan="2" rows="*, *, *, *">
+        <GridLayout *ngFor="let item of questions[currentQuestionIndex].options; let i = index"
+            [row]="i" height="70" margin="5" padding="5" backgroundColor="#fff"
+            borderRadius="20" (tap)="selectAnswer(i, $event)">
+            <Label verticalAlignment="center" horizontalAlignment="center"
+                textAlignment="center" [color]="questions[currentQuestionIndex].selected == i ? '#fff' : '#000'"
+                fontSize="13" fontWeight="bold" textWrap="true" [text]="item"></Label>
+        </GridLayout>
+    </GridLayout>
+
+</GridLayout>

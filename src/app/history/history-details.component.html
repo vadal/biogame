@@ -1,0 +1,63 @@
+<ActionBar class="action-bar">
+        <!-- 
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" class="action-nav-btn" icon="res://menu"
+            (tap)="onDrawerButtonTap()"></NavigationButton>
+        <!-- 
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem class="action-nav-btn" icon="res://navigation/menu"
+            android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Αποτελέσματα"></Label>
+    </ActionBar>
+    
+    <GridLayout class="page page-content" tkMainContent>
+        <ScrollView class="page">
+            <StackLayout class="home-panel">
+                <GridLayout columns="*" rows="*,*" class="quiz-general">
+                        <ng-container *ngIf="results?.chapter == 0;else withChapter">
+                            <Label [text]="'Όλα τα κεφάλαια'" row="0" col="0"></Label>
+                        </ng-container>
+                        <ng-template #withChapter>
+                            <Label [text]="'Κεφάλαιο ' + results?.chapterDisplay" row="0" col="1"></Label>
+                        </ng-template>
+                        <ng-container *ngIf="results?.difficulty == 0;else withDifficulty">
+                            <Label [text]="'Όλοι οι βαθμοί δυσκολίας'" row="1"
+                            col="0"></Label>
+                        </ng-container>
+                        <ng-template #withDifficulty>
+                            <Label [text]="'Βαθμός δυσκολίας: ' + results?.difficultyDisplay" row="1"
+                            col="0"></Label>
+                        </ng-template>
+                </GridLayout>
+                <StackLayout class="percentage">
+                    <progressBar [size]="'147'" [progress]="results?.score"></progressBar>
+                </StackLayout>
+                <StackLayout>
+                    <Label text="Ερωτήσεις" class="h2"></Label>
+                    <GridLayout columns="*" rows="*,*,*" class="quiz-question" *ngFor="let question of results?.results; let i=index">
+                        <Label class="question" [text]="i+1 + '. ' +question.question" row="0" col="0" textWrap="true"></Label>
+                        <GridLayout columns="auto,*" rows="*,*" col="0" row="1">
+                            <ng-container *ngIf="question.correctAnswer;else isCorrect;">
+                                <Label text="&#xf00d;" class="fa wrong" row="0" col="0" textWrap="true"></Label>
+                                <Label class="answer" [text]="question.answer" row="0" col="1" textWrap="true"></Label>
+                                <Label class="right-answer" [text]="'Σωστή απάντηση: '+ question.correctAnswer" row="1" col="0" colspan="2" textWrap="true"></Label>
+                            </ng-container>
+                            <ng-template #isCorrect>
+                                <Label text="&#xf00c;" class="fa right" row="0" col="0" textWrap="true"></Label>
+                                <Label class="answer" [text]="question.answer" row="0" col="1" textWrap="true"></Label>
+                            </ng-template>
+                            
+                        </GridLayout>
+                        <StackLayout class="hr-light" col="0" row="2"></StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
